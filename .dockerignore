@@ -1,0 +1,6 @@
+.venv
+data
+.env
+requirements.txt
+.git
+.gitignore
