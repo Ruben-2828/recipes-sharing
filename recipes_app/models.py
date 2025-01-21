@@ -3,8 +3,8 @@ from django.db import models
 
 class Recipe(models.Model):
     id = models.BigAutoField(primary_key=True)
-    title = models.CharField(max_length=100)
-    estimated_time = models.DurationField()
+    title = models.CharField(max_length=200)
+    duration = models.DurationField()
     description = models.TextField()
     pub_date = models.DateTimeField()
 
