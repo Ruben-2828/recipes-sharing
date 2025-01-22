@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Recipe Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="nav-content">
+                <a href="/" class="logo">Recipe Website</a>
+                <ul class="nav-links">
+                    <li><a href="{% url 'recipes_app:index' %}">Recipes</a></li>
+                    <!-- Add more navigation links here -->
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; {% now "Y" %} Recipe Website. All rights reserved.</p>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

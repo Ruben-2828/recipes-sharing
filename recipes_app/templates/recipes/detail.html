@@ -1,49 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ recipe.title }}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'recipes/style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
-<body>
-    <div class="recipe-detail">
-        <div class="recipe-header">
-            <h1>{{ recipe.title }}</h1>
-            <div class="recipe-meta">
-                <span><i class="far fa-clock"></i> Duration: {{ recipe.duration }}</span>
-                <span><i class="far fa-calendar"></i> Published: {{ recipe.pub_date|date:"F j, Y" }}</span>
-            </div>
-        </div>
+{% extends 'recipes/base_recipes.html' %}
 
-        <div class="recipe-layout">
-            <div class="recipe-main">
-                <div class="recipe-description">
-                    <h2>Description</h2>
-                    <p>{{ recipe.description }}</p>
-                </div>
-            </div>
+{% block title %}{{ recipe.title }}{% endblock %}
 
-            <aside class="recipe-sidebar">
-                <div class="recipe-ingredients">
-                    <h2>Ingredients</h2>
-                    <ul>
-                        {% for ingredient in recipe.ingredients.all %}
-                            <li>
-                                <span class="ingredient-name">{{ ingredient.name }}</span>
-                                <span class="ingredient-quantity">{{ ingredient.quantity }}</span>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </aside>
-        </div>
-
-        <div class="recipe-actions">
-            <a href="{% url 'recipes_app:index' %}" class="btn btn-secondary">Back to Recipes</a>
+{% block recipes_content %}
+<div class="recipe-detail">
+    <div class="recipe-header">
+        <h1>{{ recipe.title }}</h1>
+        <div class="recipe-meta">
+            <span><i class="far fa-clock"></i> Duration: {{ recipe.duration }}</span>
+            <span><i class="far fa-calendar"></i> Published: {{ recipe.pub_date|date:"F j, Y" }}</span>
         </div>
     </div>
-</body>
-</html>
+
+    <div class="recipe-layout">
+        <div class="recipe-main">
+            <div class="recipe-description">
+                <h2>Description</h2>
+                <p>{{ recipe.description }}</p>
+            </div>
+        </div>
+
+        <aside class="recipe-sidebar">
+            <div class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <ul>
+                    {% for ingredient in recipe.ingredients.all %}
+                        <li>
+                            <span class="ingredient-name">{{ ingredient.name }}</span>
+                            <span class="ingredient-quantity">{{ ingredient.quantity }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <div class="recipe-actions">
+        <a href="{% url 'recipes_app:index' %}" class="btn btn-secondary">Back to Recipes</a>
+    </div>
+</div>
+{% endblock %}

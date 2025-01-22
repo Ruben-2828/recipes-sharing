@@ -1,30 +1,24 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe List</title>
-    <link rel="stylesheet" href="{% static 'recipes/style.css' %}">
-</head>
-<body>
-    <div class="recipe-list">
-        <h1>Our Delicious Recipes</h1>
-        
-        {% if latest_recipes_list %}
-            <ul class="recipes-container">
-                {% for recipe in latest_recipes_list %}
-                    <li class="recipe-card">
-                        <a href="{% url 'recipes_app:detail' recipe.id %}" class="recipe-link">
-                            <span class="recipe-title">{{ recipe.title }}</span>
-                            <span class="recipe-duration">{{ recipe.duration }}</span>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="no-recipes">No recipes available right now.</p>
-        {% endif %}
-    </div>
-</body>
-</html>
+{% extends 'recipes/base_recipes.html' %}
+
+{% block title %}Recipe List{% endblock %}
+
+{% block recipes_content %}
+<div class="recipe-list">
+    <h1>Our Delicious Recipes</h1>
+    
+    {% if latest_recipes_list %}
+        <ul class="recipes-container">
+            {% for recipe in latest_recipes_list %}
+                <li class="recipe-card">
+                    <a href="{% url 'recipes_app:detail' recipe.id %}" class="recipe-link">
+                        <span class="recipe-title">{{ recipe.title }}</span>
+                        <span class="recipe-duration">{{ recipe.duration }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-recipes">No recipes available right now.</p>
+    {% endif %}
+</div>
+{% endblock %}
