@@ -14,4 +14,4 @@ def detail(request, recipe_id):
     return render(request, "recipes/detail.html", {"recipe": recipe})
 
 def add_recipe(request):
-    return HttpResponse("Page to add a recipe.")
+    return render(request, "recipes/add.html")
