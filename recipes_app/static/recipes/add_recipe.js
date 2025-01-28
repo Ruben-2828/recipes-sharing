@@ -8,12 +8,12 @@ function addIngredient() {
     
     newIngredient.innerHTML = `
         <div class="form-group">
-            <label for="ingredient-name-${ingredientCount}">Ingredient</label>
-            <input type="text" id="ingredient-name-${ingredientCount}" name="ingredient_name[]" required>
+            <label for="id_ingredient-${ingredientCount}-name">Ingredient</label>
+            <input type="text" id="id_ingredient-${ingredientCount}-name" name="ingredient-${ingredientCount}-name" required>
         </div>
         <div class="form-group">
-            <label for="ingredient-quantity-${ingredientCount}">Quantity</label>
-            <input type="text" id="ingredient-quantity-${ingredientCount}" name="ingredient_quantity[]" required>
+            <label for="id_ingredient-${ingredientCount}-quantity">Quantity</label>
+            <input type="text" id="id_ingredient-${ingredientCount}-quantity" name="ingredient-${ingredientCount}-quantity" required>
         </div>
         <button type="button" class="btn btn-remove" onclick="removeIngredient(this)">
             Remove
@@ -35,7 +35,31 @@ function updateRemoveButtons() {
     const removeButtons = document.querySelectorAll('.btn-remove');
     
     removeButtons.forEach(button => {
-        button.disabled = ingredients.length === 1;
+        button.disabled = ingredientCount === 1;
+    });
+
+    // Update total forms count in management form
+    const totalFormsInput = document.querySelector('[name="ingredient-TOTAL_FORMS"]');
+    if (totalFormsInput) {
+        totalFormsInput.value = ingredientCount;
+    }
+
+    // Update ids and names of remaining ingredients
+    ingredients.forEach((ingredient, index) => {
+        const nameInput = ingredient.querySelector('input[id*="-name"]');
+        const quantityInput = ingredient.querySelector('input[id*="-quantity"]');
+        const nameLabel = ingredient.querySelector('label[for*="-name"]');
+        const quantityLabel = ingredient.querySelector('label[for*="-quantity"]');
+        
+        // Update name input
+        nameInput.id = `id_ingredient-${index}-name`;
+        nameInput.name = `ingredient-${index}-name`;
+        nameLabel.setAttribute('for', `id_ingredient-${index}-name`);
+        
+        // Update quantity input  
+        quantityInput.id = `id_ingredient-${index}-quantity`;
+        quantityInput.name = `ingredient-${index}-quantity`;
+        quantityLabel.setAttribute('for', `id_ingredient-${index}-quantity`);
     });
 }
 

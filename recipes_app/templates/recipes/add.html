@@ -7,41 +7,33 @@
     <h1>Add New Recipe</h1>
     <form method="post" class="add-recipe-form">
         {% csrf_token %}
-        
+
         <div class="form-section">
-            <h2>Recipe Details</h2>
+            {% for field in recipe_form %}
             <div class="form-group">
-                <label for="title">Recipe Title</label>
-                <input type="text" id="title" name="title" required>
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
             </div>
-
-            <div class="form-group">
-                <label for="duration">Duration (minutes)</label>
-                <input type="number" id="duration" name="duration" min="1" required>
-            </div>
-
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" rows="4" required></textarea>
-            </div>
+            {% endfor %}
         </div>
 
         <div class="form-section">
             <h2>Ingredients</h2>
             <div id="ingredients-container">
+                {{ ingredient_formset.management_form }}
+                {% for form in ingredient_formset %}
                 <div class="ingredient-entry">
+                    {% for field in form %}
                     <div class="form-group">
-                        <label for="ingredient-name-1">Ingredient</label>
-                        <input type="text" id="ingredient-name-1" name="ingredient_name[]" required>
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
                     </div>
-                    <div class="form-group">
-                        <label for="ingredient-quantity-1">Quantity</label>
-                        <input type="text" id="ingredient-quantity-1" name="ingredient_quantity[]" required>
-                    </div>
-                    <button type="button" class="btn btn-remove" onclick="removeIngredient(this)">
-                        Remove
-                    </button>
+                    {% endfor %}
+                    <button type="button" class="btn btn-remove" onclick="removeIngredient(this)">Remove</button>
                 </div>
+                {% endfor %}
             </div>
             <button type="button" class="btn btn-secondary" onclick="addIngredient()">
                 <i class="fas fa-plus"></i> Add Ingredient

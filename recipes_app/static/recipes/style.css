@@ -376,6 +376,12 @@ body {
     position: relative;
 }
 
+.form-group input,
+.form-group textarea {
+    position: relative;
+    z-index: 2;
+}
+
 .form-group label {
     display: block;
     margin-bottom: 8px;
@@ -452,4 +458,43 @@ body {
         margin: 10px auto;
         width: 40px;
     }
+}
+
+/* Update form error styles */
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+    position: relative;
+    z-index: 2;
+}
+
+.form-group .errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85em;
+    position: relative;
+    z-index: 1;
+    top: -3px; /* Pull up slightly to overlap with field */
+}
+
+.form-group .errorlist li {
+    color: #e53e3e;
+    background-color: #fff5f5;
+    border: 1px solid #feb2b2;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 6px 12px;
+}
+
+.form-group input:not(:focus):invalid,
+.form-group textarea:not(:focus):invalid {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
