@@ -35,7 +35,7 @@ def add_recipe(request):
                 ingredient.recipe = recipe
                 ingredient.save()
 
-            return redirect("recipes_app:index")
+            return redirect("recipes_app:detail", recipe.id)
 
     return render(
         request,
@@ -45,3 +45,8 @@ def add_recipe(request):
             "ingredient_formset": ingredient_formset,
         },
     )
+
+def delete_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    recipe.delete()
+    return redirect("recipes_app:index")

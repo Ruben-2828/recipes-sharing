@@ -237,6 +237,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    margin: 10px;
 }
 
 .btn-primary {
@@ -497,4 +498,15 @@ body {
 .form-group textarea:not(:focus):invalid {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #f56565 0%, #fc8181 100%);
+    color: white;
+    border: none;
+}
+
+.btn-delete:hover {
+    background: linear-gradient(135deg, #e53e3e 0%, #f56565 100%);
+    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.2);
 }
