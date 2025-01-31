@@ -1,19 +1,23 @@
+from typing import Any
 from django.forms import formset_factory
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, render, redirect
+from django.views.generic import ListView, DetailView, CreateView
 from .form import IngredientForm, RecipeForm
 from recipes_app.models import Recipe
 
 
-def index(request):
-    latest_recipes_list = Recipe.objects.order_by("-pub_date")[:20]
-    context = {"latest_recipes_list": latest_recipes_list}
-    return render(request, "recipes/index.html", context)
+class RecipeListView(ListView):
+    model = Recipe
+    template_name = "recipes/list.html"
+    context_object_name = "latest_recipes_list"
+    queryset = Recipe.objects.order_by("-pub_date")[:20]
 
 
-def detail(request, recipe_id):
-    recipe = get_object_or_404(Recipe, pk=recipe_id)
-    return render(request, "recipes/detail.html", {"recipe": recipe})
+class RecipeDetailView(DetailView):
+    model = Recipe
+    template_name = "recipes/detail.html"
+    context_object_name = "recipe"
 
 
 def add_recipe(request):
@@ -45,6 +49,7 @@ def add_recipe(request):
             "ingredient_formset": ingredient_formset,
         },
     )
+
 
 def delete_recipe(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
