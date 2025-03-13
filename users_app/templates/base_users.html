@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-page-container">
+    <div class="auth-content">
+        {% block auth_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

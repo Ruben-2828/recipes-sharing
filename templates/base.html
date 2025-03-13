@@ -15,7 +15,11 @@
                 <a href="/" class="logo">Recipe Website</a>
                 <ul class="nav-links">
                     <li><a href="{% url 'recipes_app:index' %}">Recipes</a></li>
-                    <!-- Add more navigation links here -->
+                    {% if user.is_authenticated %}
+                    <li><form method='post' action="{% url 'users_app:logout' %}">{% csrf_token%}<button type='submit'>Logout</button></form></li>
+                    {% else %}
+                    <li><a href="{% url 'users_app:login' %}">Login</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
