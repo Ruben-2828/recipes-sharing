@@ -1,0 +1,22 @@
+{% extends 'users/base_users.html' %}
+{% load static %}
+
+{% block title %}Logout Confirmation{% endblock %}
+
+{% block auth_content %}
+<div class="login-container">
+    <div class="login-box">
+        <h2>Confirm Logout</h2>
+        <div class="login-form">
+            <p style="text-align: center; margin-bottom: 1.5rem;">Are you sure you want to logout?</p>
+            <form method="post" action="{% url 'users_app:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-primary">Yes, Logout</button>
+            </form>
+            <div class="login-footer">
+                <a href="{% url 'recipes_app:index' %}">No, take me back</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

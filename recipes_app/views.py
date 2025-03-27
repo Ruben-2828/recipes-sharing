@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from .form import IngredientForm, RecipeForm
 from recipes_app.models import Recipe
+from django.contrib.auth.decorators import login_required
 
 
 class RecipeListView(ListView):
@@ -20,6 +21,7 @@ class RecipeDetailView(DetailView):
     context_object_name = "recipe"
 
 
+@login_required
 def add_recipe(request):
     IngredientFormSet = formset_factory(IngredientForm, min_num=1, extra=0)
     recipe_form = RecipeForm(prefix="recipe")
@@ -50,7 +52,7 @@ def add_recipe(request):
         },
     )
 
-
+@login_required
 def delete_recipe(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     recipe.delete()
