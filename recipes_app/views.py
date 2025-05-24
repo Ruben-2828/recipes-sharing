@@ -7,6 +7,7 @@ from .form import IngredientForm, RecipeForm
 from recipes_app.models import Ingredient, Recipe
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 
 
 class RecipeListView(ListView):
@@ -35,6 +36,7 @@ def add_recipe(request):
         if recipe_form.is_valid() and ingredient_formset.is_valid():
             recipe = recipe_form.save(commit=False)
             recipe.pub_date = timezone.now()
+            recipe.author = request.user
             recipe.save()
 
             for form in ingredient_formset:
@@ -57,6 +59,9 @@ def add_recipe(request):
 @login_required
 def update_recipe(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
+    if recipe.author != request.user:
+        raise PermissionDenied()
+
     recipe_form = RecipeForm(
         request.POST or None,
         prefix="recipe",
@@ -98,3 +103,9 @@ class RecipeDeleteView(LoginRequiredMixin, DeleteView):
     model = Recipe
     template_name = "recipes/delete.html"
     success_url = "/"
+
+    def get_object(self, queryset=None):
+        recipe = super(RecipeDeleteView, self).get_object()
+        if not recipe.author == self.request.user:
+            raise PermissionDenied()
+        return recipe

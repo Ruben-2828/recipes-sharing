@@ -577,3 +577,10 @@ body {
     vertical-align: middle;
     line-height: 38px; /* Match checkbox height */
 }
+
+.recipe-author {
+    font-weight: normal;
+    color: #718096;
+    font-size: 0.9em;
+    margin-left: 8px;
+}

@@ -11,7 +11,15 @@
             {% for recipe in latest_recipes_list %}
                 <li class="recipe-card">
                     <a href="{% url 'recipes_app:detail' recipe.id %}" class="recipe-link">
-                        <span class="recipe-title">{{ recipe.title }}</span>
+                        <span class="recipe-title">{{ recipe.title }}
+                            <span class="recipe-author">by:
+                            {% if recipe.author %}
+                                {{ recipe.author.username }}
+                            {% else %}
+                                Deleted User
+                            {% endif %}
+                            </span>
+                        </span>
                         <span class="recipe-duration">{{ recipe.duration }}</span>
                     </a>
                 </li>
