@@ -9,6 +9,7 @@
         <div class="recipe-meta">
             <span><i class="far fa-clock"></i> Duration: {{ recipe.duration }}</span>
             <span><i class="far fa-calendar"></i> Published: {{ recipe.pub_date|date:"F j, Y" }}</span>
+            <span><i class="far fa-solid fa-user"></i> By: </span>
         </div>
     </div>
 
@@ -37,6 +38,7 @@
 
     <div class="recipe-actions">
         <a href="{% url 'recipes_app:index' %}" class="btn btn-secondary">Back to Recipes</a>
+        <a href="{% url 'recipes_app:update' recipe.id %}" class="btn btn-secondary">Update Recipe</a>
         <a href="{% url 'recipes_app:delete' recipe.id %}" class="btn btn-delete">Delete Recipe</a>
     </div>
 </div>
