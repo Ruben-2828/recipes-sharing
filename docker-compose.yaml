@@ -9,7 +9,8 @@ services:
     ports:
       - 8000:8000
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - djangonetwork
   db:
@@ -23,6 +24,11 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     networks:
       - djangonetwork
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
 networks:
   djangonetwork:
