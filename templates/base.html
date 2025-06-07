@@ -14,12 +14,11 @@
             <div class="nav-content">
                 <a href="/" class="logo">Recipe Website</a>
                 <ul class="nav-links">
-                    <li><a href="{% url 'recipes_app:index' %}">Recipes</a></li>
                     {% if user.is_authenticated %}
+                    <li><a href="{% url 'recipes_app:add' %}">Add recipe</a></li>
                     <li class="dropdown">
                         <a class="dropdown-trigger">Hi, {{ user.username }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                         <div class="dropdown-content">
-                            <a href="{% url 'recipes_app:add' %}">Add a recipe</a>
                             <a href="{% url 'users_app:logout_confirm' %}">Logout</a>
                         </div>
                     </li>
