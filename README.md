@@ -50,7 +50,7 @@ This web application is a recipe sharing platform that allows users to discover,
 
 4. **Docker:** Tool that helps developers build, share, run, and verify applications using containerization.
 
-5. **GitLab:** Version control platform for project management.
+5. **GitHub:** Version control platform for project management.
 
 ## Setup
 
@@ -62,7 +62,7 @@ This web application is a recipe sharing platform that allows users to discover,
 
 3. **Clone repository:** Clone this repository using the following command: 
     ``` 
-    git clone https://gitlab.com/Ruben-2828/recipes-sharing.git 
+    git clone https://github.com/Ruben-2828/recipes-sharing.git 
     ```
 
 4. **Set .env file:** Using the file ```.env.example```, create an actual ```.env``` file and set proper values for the environment variables.
